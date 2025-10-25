@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Infografía sobre los programas de apoyo, prevención y desarrollo de DIDECOSO 2025 en la comuna de La Florida.">
+    <title>Infografía: Servicios DIDECOSO 2025</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js ya no es necesario, se elimina -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        :root {
+            --color-primary-dark: #073B4C;
+            --color-primary: #118AB2;
+            --color-accent-yellow: #FFC300;
+            --color-accent-yellow-light: #FFD166;
+            --color-accent-green: #06D6A0;
+            --color-accent-red: #FF6B6B;
+            --color-light-bg: #f0f4f8;
+            --color-text-dark: #4a5568;
+            --color-text-primary: var(--color-primary-dark);
+        }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--color-light-bg); color: var(--color-text-dark); }
+        .main-header { background: linear-gradient(90deg, var(--color-primary-dark) 0%, var(--color-primary) 100%); color: white; }
+        .main-header .highlight-text { color: var(--color-accent-yellow-light); }
+        .section-title { color: var(--color-text-primary); font-size: 1.875rem; font-weight: 700; margin-bottom: 1.5rem; border-bottom: 2px solid #e2e8f0; padding-bottom: 0.75rem; }
+        .text-shadow { text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+        .header-logo { max-height: 90px; margin-bottom: 1.5rem; filter: drop-shadow(0px 2px 4px rgba(0,0,0,0.4)); }
+        .content-card { background-color: #ffffff; border-radius: 0.75rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1); padding: 1.5rem; margin-bottom: 2rem; }
+        .content-sub-card { background-color: #f7fafc; border-radius: 0.5rem; border: 1px solid #edf2f7; padding: 1.5rem; margin-bottom: 1.5rem; box-shadow: 0 1px 4px rgba(0,0,0,0.05); }
+        .tabs { display: flex; flex-wrap: wrap; border-bottom: 2px solid #e2e8f0; margin-bottom: 1.5rem; justify-content: center; gap: 0.5rem; }
+        .tab-link { padding: 0.85rem 1.75rem; cursor: pointer; font-weight: 600; color: var(--color-text-dark); background-color: transparent; border: none; border-bottom: 4px solid transparent; transition: all 0.3s ease; white-space: nowrap; border-radius: 0.375rem 0.375rem 0 0; }
+        .tab-link:hover:not(.active) { background-color: var(--color-light-bg); color: var(--color-text-primary); }
+        .tab-link.active { color: var(--color-text-primary); border-bottom-color: var(--color-accent-yellow); background-color: #ffffff; box-shadow: 0 -2px 5px rgba(0,0,0,0.05); }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; animation: fadeIn 0.5s ease-in-out; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+        .workshop-item { background-color: #eef7ff; color: var(--color-primary); padding: 0.5rem 1rem; border-radius: 9999px; font-weight: 500; text-align: center; border: 1px solid #d1e9f4; box-shadow: 0 1px 3px rgba(0,0,0,0.08); cursor: pointer; transition: all 0.2s ease-in-out; }
+        .workshop-item:hover { transform: translateY(-2px); box-shadow: 0 4px 8px rgba(0,0,0,0.1); background-color: #dbeafe; }
+        .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.6); display: flex; justify-content: center; align-items: center; z-index: 1000; opacity: 0; visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease; }
+        .modal-overlay.visible { opacity: 1; visibility: visible; }
+        .modal-content { background: white; padding: 2rem; border-radius: 0.75rem; max-width: 500px; width: 90%; box-shadow: 0 5px 15px rgba(0,0,0,0.3); transform: translateY(-20px); transition: transform 0.3s ease; }
+        .modal-overlay.visible .modal-content { transform: translateY(0); }
+        .modal-close { float: right; font-size: 2rem; font-weight: bold; line-height: 1; cursor: pointer; color: #888; }
+        .modal-close:hover { color: #000; }
+        .modal-title { color: var(--color-text-primary); }
+        /* Ya no se necesita chart-container, se elimina */
+        .footer { background-color: var(--color-primary-dark); color: white; }
+        .footer-separator { border-top: 2px solid var(--color-accent-yellow); padding-top: 1.5rem; margin-top: 2rem; }
+    </style>
+</head>
+<body class="bg-slate-100">
+
+    <div class="container mx-auto p-4 md:p-8">
+
+        <header class="main-header text-center p-10 rounded-lg mb-8 shadow-lg">
+            <img src="https://www.laflorida.cl/sitio/wp-content/uploads/2024/05/header_laflorida_2024.png" alt="Logo Ilustre Municipalidad de La Florida 2024" class="header-logo mx-auto" onerror="this.style.display='none'">
+            <h1 class="text-4xl md:text-5xl font-bold mb-2 text-shadow">GUÍA DE SERVICIOS MUNICIPALES</h1>
+            <p class="text-xl md:text-2xl text-shadow highlight-text">DIDECOSO 2025</p>
+            <p class="max-w-4xl mx-auto mt-4 text-base opacity-90">Un catálogo de los principales centros y programas ofrecidos por la municipalidad, diseñados para apoyar a los diversos grupos de nuestra comunidad.</p>
+        </header>
+        
+        <main class="content-card">
+            <div class="tabs" role="tablist" aria-label="Navegación de secciones">
+                <button role="tab" aria-selected="true" aria-controls="adultoMayor-panel" id="adultoMayor-tab" class="tab-link active" data-tab="adultoMayor">Adultos Mayores</button>
+                <button role="tab" aria-selected="false" aria-controls="centroMujer-panel" id="centroMujer-tab" class="tab-link" data-tab="centroMujer">Centro de la Mujer</button>
+                <button role="tab" aria-selected="false" aria-controls="seccionMujer-panel" id="seccionMujer-tab" class="tab-link" data-tab="seccionMujer">Sección de la Mujer</button>
+                <button role="tab" aria-selected="false" aria-controls="ninosJovenes-panel" id="ninosJovenes-tab" class="tab-link" data-tab="ninosJovenes">Niños, Niñas y Jóvenes</button>
+                <button role="tab" aria-selected="false" aria-controls="apoyoGeneral-panel" id="apoyoGeneral-tab" class="tab-link" data-tab="apoyoGeneral">Apoyo General</button>
+            </div>
+
+            <!-- Pestaña Adultos Mayores (Contenido Nuevo) -->
+            <div id="adultoMayor-panel" role="tabpanel" aria-labelledby="adultoMayor-tab" class="tab-content active">
+                <section>
+                    <h2 class="section-title text-center">Programas para Adultos Mayores</h2>
+                    <div class="content-sub-card">
+                        <h3 class="text-2xl font-bold text-center mb-6 text-primary-dark">Servicios Dedicados al Bienestar y Participación</h3>
+                        <div class="space-y-6">
+                            <!-- Programa Adulto Mayor -->
+                            <div class="p-6 rounded-lg border-t-4 border-blue-400 bg-blue-50">
+                                <h4 class="text-xl font-bold mb-3 text-blue-800 flex items-center gap-3"><i class="fa-solid fa-user-group"></i>Programa Adulto Mayor 2025</h4>
+                                <p class="font-semibold mb-2">Público:</p>
+                                <p class="text-gray-700 mb-4">Vecinos y vecinas a partir de los 60 años.</p>
+                                <p class="font-semibold mb-2">Servicio:</p>
+                                <p class="text-gray-700">Mejorar la calidad de vida y fomentar la participación. Ofrece apoyo social, jurídico y psicológico (especialmente en casos de maltrato), además de recreación, cultura y grandes eventos comunitarios.</p>
+                            </div>
+                            <!-- Programa Vínculos -->
+                            <div class="p-6 rounded-lg border-t-4 border-teal-400 bg-teal-50">
+                                <h4 class="text-xl font-bold mb-3 text-teal-800 flex items-center gap-3"><i class="fa-solid fa-link"></i>Programa Vínculos 2025</h4>
+                                <p class="font-semibold mb-2">Público:</p>
+                                <p class="text-gray-700 mb-4">Adultos mayores de 65 años o más que viven solos (o acompañados por una persona) en situación de vulnerabilidad.</p>
+                                <p class="font-semibold mb-2">Servicio:</p>
+                                <p class="text-gray-700">Acompañamiento psicosocial y ocupacional (12-24 meses) para ayudar a los usuarios a acceder a prestaciones sociales y conectarlos con la red comunitaria. Financiado por el Ministerio de Desarrollo Social y Familia.</p>
+                            </div>
+                            <!-- Centros de Atención Diurna (CAD) -->
+                            <div class="p-6 rounded-lg border-t-4 border-purple-400 bg-purple-50">
+                                <h4 class="text-xl font-bold mb-3 text-purple-800 flex items-center gap-3"><i class="fa-solid fa-house-chimney-medical"></i>Centros de Atención Diurna (CAD)</h4>
+                                <p class="font-semibold mb-2">Público:</p>
+                                <p class="text-gray-700 mb-4">Adultos mayores de escasos recursos (110 beneficiarios).</p>
+                                <p class="font-semibold mb-2">Servicio:</p>
+                                <p class="text-gray-700">Proporcionar atención y acogida en 5 centros diurnos para prevenir el deterioro. Incluye alimentación (desayuno, almuerzo, once) y actividades de estimulación cognitiva, física y manualidades.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            
+            <!-- Pestaña Centro de la Mujer (Contenido Actualizado) -->
+            <div id="centroMujer-panel" role="tabpanel" aria-labelledby="centroMujer-tab" class="tab-content">
+                <section>
+                    <h2 class="section-title text-center">Centro de la Mujer 2025</h2>
+                    <div class="content-sub-card text-center">
+                        <p class="text-lg text-gray-700 max-w-4xl mx-auto">Este centro se especializa en la atención a mujeres que viven o han vivido violencia en el contexto de pareja o ex pareja. Es un convenio entre la <strong>Municipalidad</strong> y <strong>SernamEG</strong>.</p>
+                    </div>
+                    <div class="content-sub-card">
+                        <h3 class="text-2xl font-bold text-center mb-6 text-primary-dark">Atención Integral</h3>
+                        <div class="max-w-3xl mx-auto text-center">
+                            <div class="p-6 rounded-lg border-t-4" style="border-color: #FF6B6B; background-color: #fff5f5;">
+                                <h4 class="text-xl font-bold mb-3 flex items-center justify-center gap-3"><i class="fa-solid fa-shield-heart"></i>Objetivo Principal</h4>
+                                <p class="text-gray-700 mb-4">Disminuir la violencia contra las mujeres (VCM/VG) en la comuna.</p>
+                                <p class="font-semibold mb-2">Servicios Clave:</p>
+                                <ul class="list-disc list-inside text-gray-700 space-y-1 text-left max-w-md mx-auto">
+                                    <li>Intervención integral (Psicosocial, Educativa y Jurídica).</li>
+                                    <li>Acciones de prevención y sensibilización en la comunidad.</li>
+                                    <li>Apoyo a mujeres que viven o han vivido violencia.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Mantenemos la info de protección del código antiguo ya que es relevante -->
+                    <div class="content-sub-card"><h3 class="text-2xl font-bold text-center mb-6 text-primary-dark">Protección a la Mujer</h3><ul class="max-w-lg mx-auto space-y-3 text-left"><li class="flex items-center text-lg p-3 rounded-md bg-gray-50 border border-gray-200"><span class="text-2xl mr-3">🛡️</span> Convenio con la Fiscalía para casos en riesgo alto o vital.</li><li class="flex items-center text-lg p-3 rounded-md bg-gray-50 border border-gray-200"><span class="text-2xl mr-3">📞</span> Atenciones a través del teléfono de emergencia 1416.</li><li class="flex items-center text-lg p-3 rounded-md bg-gray-50 border border-gray-200"><span class="text-2xl mr-3">🚨</span> Entrega de Botones SOS para mujeres que han sufrido acoso callejero.</li></ul></div>
+                </section>
+            </div>
+
+            <!-- Pestaña Sección de la Mujer (Contenido Fusionado) -->
+            <div id="seccionMujer-panel" role="tabpanel" aria-labelledby="seccionMujer-tab" class="tab-content">
+                <section>
+                    <h2 class="section-title text-center">Sección de la Mujer y Autonomía</h2>
+                    
+                    <!-- Info de Sección de la Mujer 2025 -->
+                    <div class="content-sub-card">
+                        <h3 class="text-2xl font-bold text-center mb-4 text-primary-dark">Sección de la Mujer 2025</h3>
+                        <p class="text-center text-lg text-gray-700 max-w-4xl mx-auto">Un programa amplio enfocado en la autonomía y el empoderamiento de todas las mujeres (mayores de 18 años) de la comuna, apoyando la construcción de equidad de género.</p>
+                        <div class="grid md:grid-cols-2 gap-4 mt-6 text-center">
+                            <div class="p-4 bg-blue-50 rounded-lg border border-blue-200">
+                                <h4 class="font-bold text-lg text-blue-800">Formación y Capacitación</h4>
+                                <p>Talleres para fortalecer habilidades, liderazgo, emprendimiento y oficios.</p>
+                            </div>
+                            <div class="p-4 bg-blue-50 rounded-lg border border-blue-200">
+                                <h4 class="font-bold text-lg text-blue-800">Apoyo y Redes</h4>
+                                <p>Asistencia social y psicológica. Asesoría a organizaciones de mujeres para postular a fondos.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Info de Jefas de Hogar 2025 -->
+                    <div class="content-sub-card">
+                        <h3 class="text-2xl font-bold text-center mb-4 text-primary-dark">Programa Mujeres Jefas de Hogar 2025</h3>
+                        <p class="text-center text-xl font-semibold italic text-gray-500 mb-4">Un Programa PENSADO para ELLAS</p>
+                        <p class="text-center text-gray-700 max-w-3xl mx-auto">Destinado a mujeres económicamente activas que son el principal sustento de sus hogares. Busca promover su autonomía económica a través de:</p>
+                        <ul class="list-disc list-inside text-gray-700 space-y-1 text-left max-w-md mx-auto mt-4">
+                            <li>Talleres de formación para el trabajo (dependiente e independiente).</li>
+                            <li>Capacitación en oficios (ej. cursos de conducción).</li>
+                            <li>Coordinación con la OMIL para inserción laboral.</li>
+                            <li>Apoyo para postular a fondos de inversión (Capital Semilla).</li>
+                            <li>Ferias de emprendedoras y convenios de comercialización.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Lista de Talleres (del código antiguo) -->
+                    <div class="content-sub-card"><h3 class="text-2xl font-bold text-center mb-2 text-primary-dark">Talleres Laborales Gratuitos</h3><p class="text-center text-gray-600 mb-6">Requisitos: ser mayor de 18 años y vivir en la comuna de La Florida.</p><div class="mb-6"><h4 class="text-xl font-semibold mb-3 text-center text-primary-dark">Talleres Anuales <span class="text-sm font-normal text-gray-500">(Inscripciones en Enero)</span></h4><div class="flex justify-center gap-4 flex-wrap"><button class="workshop-item" data-title="Repostería y Gastronomía" data-description="Aprende técnicas de cocina y pastelería para iniciar tu propio emprendimiento. Desde masas básicas hasta decoración de tortas, este taller te dará las herramientas para endulzar tu futuro.">Repostería y Gastronomía</button><button class="workshop-item" data-title="Manicure/Pedicure" data-description="Conviértete en una profesional de la belleza de manos y pies. El curso cubre técnicas de esmaltado tradicional, permanente, cuidado de uñas y más.">Manicure/Pedicure</button><button class="workshop-item" data-title="Peluquería" data-description="Fórmate en el arte de la peluquería, aprendiendo técnicas de corte, color, peinado y tratamientos capilares para ofrecer un servicio integral.">Peluquería</button></div></div><div><h4 class="text-xl font-semibold mb-4 text-center text-primary-dark">Talleres Semestrales <span class="text-sm font-normal text-gray-500">(Inscripciones en Julio)</span></h4><div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"><button class="workshop-item" data-title="Estética" data-description="Sumérgete en el mundo del cuidado facial y corporal. Aprenderás sobre tratamientos de la piel, limpiezas, masajes y el uso de productos para realzar la belleza natural.">Estética</button><button class="workshop-item" data-title="Maquillaje y Peinado" data-description="Desarrolla tu creatividad y aprende a crear looks para toda ocasión. Desde maquillaje de día y noche hasta peinados elaborados, este taller te convertirá en una artista.">Maquillaje y Peinado</button><button class="workshop-item" data-title="Cosmetología Natural" data-description="Descubre el poder de la naturaleza para el cuidado personal. Aprenderás a elaborar tus propios cosméticos con ingredientes orgánicos y técnicas amigables con el medio ambiente.">Cosmetología Natural</button><button class="workshop-item" data-title="Corte y Confección" data-description="Dale vida a tus ideas y aprende a crear prendas desde cero. El taller abarca desde la toma de medidas y el manejo de la máquina de coser hasta la confección de ropa.">Corte y Confección</button><button class="workshop-item" data-title="Bordado" data-description="Explora el arte de decorar con hilos y agujas. Aprenderás diferentes puntadas y técnicas para crear diseños únicos en tela, personalizando prendas y accesorios.">Bordado</button><button class="workshop-item" data-title="Mosaico y Pintura" data-description="Libera tu lado artístico y aprende a crear obras coloridas. Trabajarás con técnicas de mosaico para componer imágenes con fragmentos y explorarás la pintura en distintas superficies.">Mosaico y Pintura</button><button class="workshop-item" data-title="Yoga y Acondicionamiento" data-description="Encuentra el equilibrio entre cuerpo y mente. Este taller te guiará a través de posturas de yoga y ejercicios de acondicionamiento para mejorar tu flexibilidad, fuerza y bienestar general.">Yoga y Acondicionamiento</button><button class="workshop-item" data-title="Terapia Complementaria" data-description="Iníciate en técnicas de sanación y bienestar alternativas. Aprenderás sobre masajes, aromaterapia, Reiki, hierbas medicinales, alineación de chakras y numerología para promover la relajación y el equilibrio energético.">Terapia Complementaria</button><button class="workshop-item" data-title="Tejidos (Palillo/Crochet)" data-description="Domina el arte de tejer y crea prendas y accesorios únicos. Aprenderás desde los puntos básicos hasta patrones complejos, tanto con palillos como con crochet.">Tejidos (Palillo/Crochet)</button><button class="workshop-item" data-title="Macramé y Telar" data-description="Descubre el arte de los nudos decorativos y el tejido en telar. Crearás piezas únicas como tapices, colgantes para plantas y otros objetos ornamentales.">Macramé y Telar</button><button class="workshop-item" data-title="Reciclaje Textil" data-description="Transforma prendas que ya no usas en nuevos productos con estilo. Aprenderás técnicas creativas para dar una segunda vida a la ropa y contribuir a la moda sostenible.">Reciclaje Textil</button><button class="workshop-item" data-title="Técnicas de Construcción" data-description="Adquiere habilidades prácticas para realizar reparaciones y mejoras en el hogar. El taller cubre nociones básicas de piso, electricidad, cañerías y otros.">Técnicas de Construcción</button><button class="workshop-item" data-title="Globoflexia" data-description="Aprende a crear figuras y decoraciones increíbles con globos. Este taller es ideal para animar eventos, fiestas infantiles o iniciar un emprendimiento creativo.">Globoflexia</button><button class="workshop-item" data-title="Bisutería" data-description="Diseña y crea tus propias joyas y accesorios. Aprenderás a trabajar con diferentes materiales, herramientas y técnicas para elaborar piezas únicas y originales.">Bisutería</button></div></div></div>
+                </section>
+            </div>
+            
+            <!-- Pestaña Niños, Niñas y Jóvenes (Contenido Nuevo) -->
+            <div id="ninosJovenes-panel" role="tabpanel" aria-labelledby="ninosJovenes-tab" class="tab-content">
+                <section>
+                    <h2 class="section-title text-center">Niños, Niñas y Jóvenes</h2>
+                    <div class="content-sub-card">
+                        <h3 class="text-2xl font-bold text-center mb-6 text-primary-dark">Protección y Desarrollo Integral</h3>
+                        <div class="space-y-6">
+                            <!-- Oficina Local de la Niñez (OLN) -->
+                            <div class="p-6 rounded-lg border-t-4 border-green-400 bg-green-50">
+                                <h4 class="text-xl font-bold mb-3 text-green-800 flex items-center gap-3"><i class="fa-solid fa-file-shield"></i>Oficina Local de la Niñez (OLN)</h4>
+                                <p class="font-semibold mb-2">Público:</p>
+                                <p class="text-gray-700 mb-4">Todos los Niños, Niñas y Adolescentes (NNA) de la comuna.</p>
+                                <p class="font-semibold mb-2">Servicio:</p>
+                                <p class="text-gray-700">Implementa el Sistema de Garantías y Protección Integral (Ley 21.430). Se encarga de la gestión integrada de casos para prevenir vulneraciones, promueve los derechos de NNA en el territorio y lidera la Mesa Comunal de niñez.</p>
+                            </div>
+                            <!-- Programa Infancia -->
+                            <div class="p-6 rounded-lg border-t-4 border-yellow-400 bg-yellow-50">
+                                <h4 class="text-xl font-bold mb-3 text-yellow-800 flex items-center gap-3"><i class="fa-solid fa-hands-holding-child"></i>Programa "Infancia 2025"</h4>
+                                <p class="font-semibold mb-2">Público:</p>
+                                <p class="text-gray-700 mb-4">Desde la gestación hasta los 17 años.</p>
+                                <p class="font-semibold mb-2">Servicio:</p>
+                                <p class="text-gray-700">Apoya el desarrollo integral de NNA y sus familias. Implementa programas de apoyo al bienestar y salud mental en colegios (ej. Habilidades para la Vida), fomenta la participación (Congreso Comunal NNJ) y fortalece "Chile Crece Más".</p>
+                            </div>
+                            <!-- Programa Jóvenes -->
+                            <div class="p-6 rounded-lg border-t-4 border-indigo-400 bg-indigo-50">
+                                <h4 class="text-xl font-bold mb-3 text-indigo-800 flex items-center gap-3"><i class="fa-solid fa-rocket"></i>Programa "Jóvenes 2025"</h4>
+                                <p class="font-semibold mb-2">Público:</p>
+                                <p class="text-gray-700 mb-4">Jóvenes de 15 a 29 años.</p>
+                                <p class="font-semibold mb-2">Servicio:</p>
+                                <p class="text-gray-700">Promueve el desarrollo integral y el bienestar juvenil. Incluye el programa de salud mental "El poder del cambio está en tu mente", capacitaciones FUAS, Feria Universitaria, Congreso de Centros de Estudiantes y actividades deportivas/recreativas.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Pestaña Apoyo General (Contenido Nuevo, reemplaza Datos VIF) -->
+            <div id="apoyoGeneral-panel" role="tabpanel" aria-labelledby="apoyoGeneral-tab" class="tab-content">
+                <section>
+                    <h2 class="section-title text-center">Apoyo General a la Comunidad</h2>
+                    <div class="content-sub-card">
+                         <h3 class="text-2xl font-bold text-center mb-6 text-primary-dark">Servicios Transversales de Apoyo</h3>
+                        <div class="grid md:grid-cols-2 gap-8">
+                            <!-- Centro del Cariño -->
+                            <div class="p-6 rounded-lg border-t-4 border-rose-400 bg-rose-50">
+                                <h4 class="text-xl font-bold mb-3 text-rose-800 flex items-center gap-3"><i class="fa-solid fa-hand-holding-heart"></i>Centro del Cariño 2025</h4>
+                                <p class="font-semibold mb-2">Público:</p>
+                                <p class="text-gray-700 mb-4">Residentes de 18 a 80 años.</p>
+                                <p class="font-semibold mb-2">Servicio:</p>
+                                <p class="text-gray-700 mb-4">Atención psicológica gratuita y terapias complementarias (Reiki, flores de Bach, etc.) para contribuir al bienestar emocional.</p>
+                                <p class="font-semibold mb-2">Ejes de Atención:</p>
+                                <ul class="list-disc list-inside text-gray-700 space-y-1">
+                                    <li>Duelo (por pérdida de seres queridos).</li>
+                                    <li>Violencia Intrafamiliar (VIF).</li>
+                                    <li>Diagnóstico de Cáncer.</li>
+                                    <li>Estados de Depresión (no crónicos).</li>
+                                </ul>
+                            </div>
+                            <!-- Apoyo a Víctimas de Delitos -->
+                            <div class="p-6 rounded-lg border-t-4 border-red-500 bg-red-50">
+                                <h4 class="text-xl font-bold mb-3 text-red-800 flex items-center gap-3"><i class="fa-solid fa-user-shield"></i>Apoyo a Víctimas de Delitos Violentos 2025</h4>
+                                <p class="font-semibold mb-2">Público:</p>
+                                <p class="text-gray-700 mb-4">Víctimas de delitos violentos de alta connotación social en la comuna.</p>
+                                <p class="font-semibold mb-2">Servicio:</p>
+                                <p class="text-gray-700">Intervención integral para garantizar los derechos de las víctimas. Incluye asesoría jurídica con abogados penales y apoyo psicológico (intervención en crisis y acompañamiento). Se accede por RPM 1416, derivación o consulta espontánea.</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+        </main>
+        
+        <footer class="footer text-center mt-12 p-8 rounded-lg">
+            <h2 class="text-3xl font-bold mb-6 text-shadow">Contacto de Emergencia</h2>
+            
+            <p class="text-lg">Para información sobre estos u otros programas, contactarse con la Municipalidad de La Florida.</p>
+            <p class="text-lg mt-4">Si vives una emergencia de seguridad o necesitas asistencia inmediata:</p>
+            
+            <div class="footer-separator">
+                <p class="text-lg font-bold">Llama al Fono de Emergencia Municipal:</p>
+                <p class="text-4xl font-bold tracking-wider mt-1" style="color: var(--color-accent-green);"><i class="fa-solid fa-triangle-exclamation"></i> 1416</p>
+            </div>
+        </footer>
+
+    </div>
+
+    <!-- Modal para Talleres (se mantiene) -->
+    <div id="workshopModal" class="modal-overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden>
+        <div class="modal-content"><button class="modal-close" aria-label="Cerrar modal">&times;</button><h2 id="modalTitle" class="text-2xl font-bold mb-4 modal-title"></h2><p id="modalDescription" class="text-gray-700"></p></div>
+    </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    // --- Inicialización de Pestañas ---
+    const initTabs = () => {
+        const tabContainer = document.querySelector('.tabs');
+        if (!tabContainer) return;
+
+        const tabs = Array.from(tabContainer.querySelectorAll('.tab-link'));
+        const tabPanels = document.querySelectorAll('.tab-content');
+
+        const openTab = (tabId) => {
+            tabs.forEach(tab => {
+                const isActive = tab.dataset.tab === tabId;
+                tab.classList.toggle('active', isActive);
+                tab.setAttribute('aria-selected', isActive);
+            });
+            tabPanels.forEach(panel => {
+                const isActive = panel.id === `${tabId}-panel`;
+                panel.classList.toggle('active', isActive);
+            });
+        };
+
+        tabContainer.addEventListener('click', (event) => {
+            const clickedTab = event.target.closest('.tab-link');
+            if (clickedTab) {
+                openTab(clickedTab.dataset.tab);
+                const contentCard = document.querySelector('.content-card');
+                if (contentCard) {
+                    // Desplazamiento suave al inicio del contenedor de pestañas
+                    contentCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            }
+        });
+
+        tabContainer.addEventListener('keydown', (e) => {
+            const currentTab = document.activeElement;
+            if (!currentTab || !currentTab.classList.contains('tab-link')) return;
+
+            const currentIndex = tabs.indexOf(currentTab);
+            let newIndex = -1;
+
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                e.preventDefault();
+                newIndex = (currentIndex + 1) % tabs.length;
+            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                e.preventDefault();
+                newIndex = (currentIndex - 1 + tabs.length) % tabs.length;
+            }
+
+            if (newIndex !== -1) {
+                tabs[newIndex].focus();
+                openTab(tabs[newIndex].dataset.tab);
+            }
+        });
+
+        // Abrir la primera pestaña por defecto
+        if(tabs.length > 0) openTab(tabs[0].dataset.tab);
+    };
+
+    // --- Inicialización del Modal de Talleres ---
+    const initWorkshopModal = () => {
+        const modal = document.getElementById('workshopModal');
+        if (!modal) return;
+
+        const modalTitle = document.getElementById('modalTitle');
+        const modalDescription = document.getElementById('modalDescription');
+        const workshopButtons = document.querySelectorAll('.workshop-item');
+        const closeModalButton = modal.querySelector('.modal-close');
+        let lastFocusedElement; 
+
+        const focusableElementsString = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+
+        const trapFocus = (e) => {
+            const focusableElements = Array.from(modal.querySelectorAll(focusableElementsString));
+            const firstElement = focusableElements[0];
+            const lastElement = focusableElements[focusableElements.length - 1];
+
+            if (e.key === 'Tab') {
+                if (e.shiftKey && document.activeElement === firstElement) {
+                    e.preventDefault();
+                    lastElement.focus();
+                } else if (!e.shiftKey && document.activeElement === lastElement) {
+                    e.preventDefault();
+                    firstElement.focus();
+                }
+            }
+        };
+
+        const openModal = (title, description, opener) => {
+            lastFocusedElement = opener;
+            if (modalTitle) modalTitle.textContent = title;
+            if (modalDescription) modalDescription.textContent = description;
+            
+            modal.classList.add('visible');
+            modal.removeAttribute('hidden');
+            document.addEventListener('keydown', trapFocus);
+            closeModalButton?.focus();
+        };
+
+        const closeModal = () => {
+            modal.classList.remove('visible');
+            modal.setAttribute('hidden', 'true');
+            document.removeEventListener('keydown', trapFocus);
+            if (lastFocusedElement) {
+                lastFocusedElement.focus();
+            }
+        };
+
+        workshopButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const title = button.dataset.title;
+                const description = button.dataset.description;
+                openModal(title, description, button);
+            });
+        });
+
+        closeModalButton?.addEventListener('click', closeModal);
+        modal.addEventListener('click', (event) => {
+            if (event.target === modal) closeModal();
+        });
+        document.addEventListener('keydown', (event) => {
+            if (event.key === 'Escape' && modal.classList.contains('visible')) closeModal();
+        });
+    };
+
+    const initCharts = () => {
+        const defaultChartOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    labels: {
+                        color: 'var(--color-text-dark)',
+                        font: {
+                            family: "'Poppins', sans-serif"
+                        }
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    beginAtZero: true,
+                    ticks: { color: 'var(--color-text-dark)' },
+                    grid: { color: '#e2e8f0' }
+                },
+                x: {
+                    ticks: { color: 'var(--color-text-dark)' },
+                    grid: { display: false }
+                }
+            }
+        };
+
+        const createChart = (canvasId, config) => {
+            const ctx = document.getElementById(canvasId)?.getContext('2d');
+            if (ctx) {
+                new Chart(ctx, config);
+            } else {
+                console.warn(`Canvas con id "${canvasId}" no fue encontrado.`);
+            }
+        };
+
+        createChart('totalCasesChart', {
+            type: 'bar',
+            data: { labels: chartData.totalCases.labels, datasets: [{ label: 'Total Casos VIF', data: chartData.totalCases.values, backgroundColor: [chartPalette.blue, chartPalette.green] }] },
+            options: { ...defaultChartOptions, plugins: { legend: { display: false } } }
+        });
+
+        createChart('aggressionTypeChart', {
+            type: 'bar',
+            data: { labels: chartData.aggressionTypes.labels, datasets: [ { label: '2024', data: chartData.aggressionTypes.values2024, backgroundColor: chartPalette.darkBlue }, { label: '2025', data: chartData.aggressionTypes.values2025, backgroundColor: chartPalette.blue } ] },
+            options: defaultChartOptions
+        });
+        
+        createChart('dailyIncidentsChart', {
+            type: 'bar',
+            data: { labels: chartData.dailyIncidents.labels, datasets: [{ label: 'Número de Incidentes', data: chartData.dailyIncidents.values, backgroundColor: chartData.dailyIncidents.labels.map(day => day === 'Domingo' ? chartPalette.yellow : chartPalette.blue) }] },
+            options: { ...defaultChartOptions, plugins: { legend: { display: false } } }
+        });
+        
+        createChart('hourlyIncidentsChart', {
+            type: 'bar',
+            data: { labels: chartData.hourlyIncidents.labels, datasets: [{ label: 'Número de Incidentes', data: chartData.hourlyIncidents.values, backgroundColor: chartPalette.darkBlue }] },
+            options: { ...defaultChartOptions, plugins: { legend: { display: false } } }
+        });
+    };
+
+    // Inicializar todas las funcionalidades
+    initTabs();
+    initWorkshopModal();
+    initCharts();
+});
+</script>
+
+</body>
+</html>
+IMLF.html
+IMLF.html (38 KB)
+38 KB
